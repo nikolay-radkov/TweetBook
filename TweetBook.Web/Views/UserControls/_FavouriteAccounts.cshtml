@@ -1,0 +1,11 @@
+﻿@model ICollection<TweetBook.Models.FavouriteAccount>
+@foreach (var account in Model)
+{
+    <span class="badge">
+        <a href="@Url.Action("Index", "Tweets", routeValues: new
+                            {
+                                id = 1,
+                                screenName = @account.Name
+                            })">@account.Name</a>
+                        </span>
+}

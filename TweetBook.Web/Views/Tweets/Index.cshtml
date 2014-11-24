@@ -1,0 +1,58 @@
+﻿@model List<OAuthTwitterWrapper.JsonTypes.TimeLine>
+@{
+    ViewBag.Title = "Tweets";
+}
+
+<div class="row">
+    <br />
+    <div class="col-md-1">@Html.ActionLink("<<", "Index", new { id = (int)TempData["page"] == 1 ? 1 : (int)TempData["page"] - 1, screenName = TempData["screenName"] }, new { @class = " btn btn-lg btn-info" })</div>
+    <div class="col-md-10 text-center"><h1>@ViewBag.Title by <em><b>@TempData["screenName"]</b></em></h1></div>
+    <div class="col-md-1">@Html.ActionLink(">>", "Index", new { id = (int)TempData["page"] + 1, screenName = TempData["screenName"] }, new { @class = " btn btn-lg btn-info" })</div>
+    <br />
+</div>
+@foreach (var t in Model)
+{
+    <div class="alert alert-info">
+        <div class="row">
+            <div class="col-md-10">
+                @if (t.Entities.Media != null && t.Entities.Media.Any())
+                {
+                    <div class="row">
+
+                        <div class="col-md-2 thumbnail">
+                            <img src="@t.Entities.Media[0].media_url" width="@t.Entities.Media[0].sizes.thumb.w" height="@t.Entities.Media[0].sizes.thumb.h" />
+                        </div>
+                        <div class="col-md-10">
+                            <h5>@t.Text</h5>
+                            <small>
+                                <a href="@t.User.Url" rel="nofollow" target="_blank">@t.User.ScreenName</a>
+                                @t.CreatedAt
+                            </small>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    <h5>@t.Text</h5>
+                    <small>
+                        <a href="@t.User.Url" rel="nofollow" target="_blank">@t.User.ScreenName</a>
+                        @t.CreatedAt
+                    </small>
+                }
+            </div>
+            @if (Request.IsAuthenticated)
+            {
+                <div class="col-md-2">
+                    <div class="row">
+                        @Html.ActionLink("Follow Tweet", "FollowTweet", "Tweets", new TweetBook.Web.ViewModels.TweetViewModel { UserName = t.User.ScreenName, Message = t.Text }, new { @class = "btn btn-lg btn-info" })
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.ActionLink("Follow Account", "FollowAccount", "Tweets", new { id = t.User.ScreenName }, new { @class = "btn btn-lg btn-info" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

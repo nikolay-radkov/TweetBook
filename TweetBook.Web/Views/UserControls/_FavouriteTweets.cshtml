@@ -1,0 +1,15 @@
+﻿@model ICollection<TweetBook.Models.Tweet>
+@foreach (var tweet in Model)
+    {
+    <div class="alert alert-info">
+        <div class="row">
+            <div class="col-md-10">
+                <h5>@tweet.Message</h5>
+                <small>
+                    <a href="#" rel="nofollow">@tweet.FavouriteAccount.Name</a>
+                    @tweet.CreatedOn
+                </small>
+            </div>
+        </div>
+    </div>
+}

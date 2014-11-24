@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/custom")
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("TweetBook", "Index", "Home", new { area = string.Empty }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, new { })</li>
+                    <li>@Html.ActionLink("Tweets", "Index", "Tweets", new { area = string.Empty }, new { })</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Favourites", "Index", "Favourites", new { area = string.Empty }, new { })</li>
+                        @Html.Partial("~/Views/UserControls/_AdministrationDropDown.cshtml")
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @if (TempData["error"] != null)
+        {
+            <div class="bs-example">
+                <div class="alert alert-danger alert-error">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>@TempData["error"]</strong>
+                </div>
+            </div>
+        }
+        @if (TempData["message"] != null)
+        {
+            <div class="bs-example">
+                <div class="alert alert-success alert-success">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>@TempData["message"]</strong>
+                </div>
+            </div>
+        }
+        @RenderBody()
+        <hr />
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/unobtrusive")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

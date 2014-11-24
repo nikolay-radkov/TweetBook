@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Tweet Book";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+<h1 class="text-center">Welcome to TweetBook</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <br />
+                @Html.Partial("~/Views/UserControls/_SearchForm.cshtml")
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <br />@Html.Partial("~/Views/UserControls/_SendTweetForm.cshtml")
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+
+

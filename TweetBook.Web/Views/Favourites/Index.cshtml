@@ -1,0 +1,11 @@
+﻿@model TweetBook.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Favourites";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+<div>
+    @Html.Partial("~/Views/UserControls/_FavouriteAccounts.cshtml", Model.FavouriteAccounts)
+    <hr />
+    @Html.Partial("~/Views/UserControls/_FavouriteTweets.cshtml", Model.Tweets.Where(t => t.TweetType == TweetBook.Models.TweetType.Downloaded).ToList())
+</div>

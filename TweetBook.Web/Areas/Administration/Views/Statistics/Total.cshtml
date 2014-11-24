@@ -1,0 +1,27 @@
+﻿@using TweetBook.Web.Areas.Administration.ViewModels
+@model TotalStatsViewModel
+@{
+    ViewBag.Title = "Total Statistics";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+<hr />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Users Number</th>
+            <th>Users Tweets</th>
+            <th>Followed Tweets</th>
+            <th>Retweeted Tweets</th>
+            <th>Followed Accounts</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.UsersNumber</td>
+            <td>@Model.UsersTweets</td>
+            <td>@Model.FollowedTweetsNumber</td>
+            <td>@Model.RetweetedTweetsNumber</td>
+            <td>@Model.FollowedAccountsNumber</td>
+        </tr>
+    </tbody>
+</table>

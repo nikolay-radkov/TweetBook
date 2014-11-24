@@ -1,0 +1,30 @@
+﻿@using TweetBook.Web.Areas.Administration.ViewModels
+@{
+    ViewBag.Title = "Users Statistics";
+    const string ControllerName = "Statistics";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+<hr />
+@(Html.Kendo()
+    .Grid<TweetStatsViewModel>()
+    .Name("total-stats-grid")
+    .Columns(cols =>
+    {
+        cols.Bound(t => t.Id);
+        cols.Bound(t => t.UserName);
+        cols.Bound(t => t.UserTweets);
+        cols.Bound(t => t.FollowedTweetsNumber);
+        cols.Bound(t => t.RetweetedTweetsNumber);
+        cols.Bound(t => t.FollowedAccountsNumber);
+    })
+    .ColumnMenu()
+    .Pageable(page => page.Refresh(true))
+    .Sortable()
+    .Groupable()
+    .Filterable()
+    .DataSource(data =>
+        data
+            .Ajax()
+            .Model(m => m.Id(adv => adv.Id))
+            .Read(read => read.Action("Read", ControllerName))
+            ))
